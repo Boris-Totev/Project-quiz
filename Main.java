@@ -199,6 +199,7 @@ public class Main {
         int decider = sc.nextInt();
         switch (decider) {
             case 1:
+                System.out.println();
                 firstTheme(points);
             case 2:
                 secondTheme(points);

@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.Scanner;
 
 public class Main {
@@ -19,7 +20,10 @@ public class Main {
             System.exit(0);
         }
     }
+
     public static void answeredEverythingCorrectly(int points) {
+
+
         Scanner sc = new Scanner(System.in);
         System.out.println("Congratulations! You answered everything correctly. Your total points are: " + points);
         System.out.println("Would you like to continue? \n   Yes 1 \n   No 2");
@@ -42,38 +46,52 @@ public class Main {
     public static void firstTheme(int points) {
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Question 1: \n What is Ronaldo's number?");
-        System.out.println("   1. 4\n   2. 8\n   3. 7\n   4. 13");
-        int answer1 = sc.nextInt();
-        while (answer1 < 1 || answer1 > 4) {
-            if (answer1 < 1 || answer1 > 4) {
-                System.out.println("Incorrect input!");
-                System.out.println("Try again: ");
-                answer1 = sc.nextInt();
+        try (BufferedReader reader = new BufferedReader(new FileReader("Questions.txt"))) {
+
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                {
+                    if (parts.length == 5) {
+                        String question = parts[0];
+                        String answerA = parts[1];
+                        String answerB = parts[2];
+                        String answerC = parts[3];
+                        String answerD = parts[4];
+                        System.out.println(question + "\n   " + answerA + "\n   " + answerB + "\n   " + answerC + "\n   " + answerD);
+                        int answer1 = sc.nextInt();
+                        while (answer1 < 1 || answer1 > 4) {
+                            System.out.println("Incorrect input!");
+                            System.out.println("Try again: ");
+                            answer1 = sc.nextInt();
+                        }
+
+                        switch (answer1) {
+                            case 1, 2, 4:
+                                System.out.println("Wrong answer!");
+                                System.out.println("Your points are: " + points);
+                                gameOver(points);
+                            case 3:
+                                System.out.println("Correct answer!");
+                                points++;
+                                System.out.println("Your points are: " + points);
+                        }
+                    }
+                }
             }
+        } catch (IOException e) {
+            System.out.println("грешка при четене/писане на þайлове: " + e.getMessage());
         }
 
-        switch (answer1) {
-            case 1, 2, 4:
-                System.out.println("Wrong answer!");
-                System.out.println("Your points are: " + points);
-                gameOver(points);
-            case 3:
-                System.out.println("Correct answer!");
-                points++;
-                System.out.println("Your points are: " + points);
-
-        }
         System.out.println("Question 2: \n How many people are there in a football team?");
         System.out.println("   1. 5\n   2. 6\n   3. 21\n   4. 11");
         int answer2 = sc.nextInt();
 
         while (answer2 < 1 || answer2 > 4) {
-            if (answer2 < 1 || answer2 > 4) {
-                System.out.println("Incorrect input!");
-                System.out.println("Try again: ");
-                answer2 = sc.nextInt();
-            }
+            System.out.println("Incorrect input!");
+            System.out.println("Try again: ");
+            answer2 = sc.nextInt();
         }
         switch (answer2) {
             case 1, 2, 3:
@@ -90,11 +108,9 @@ public class Main {
         System.out.println("   1. Ludogoretz\n   2. Manchester United\n   3. Barcelona\n   4. Levski");
         int answer3 = sc.nextInt();
         while (answer3 < 1 || answer3 > 4) {
-            if (answer3 < 1 || answer3 > 4) {
-                System.out.println("Incorrect input!");
-                System.out.println("Try again: ");
-                answer3 = sc.nextInt();
-            }
+            System.out.println("Incorrect input!");
+            System.out.println("Try again: ");
+            answer3 = sc.nextInt();
         }
         switch (answer3) {
             case 2, 3, 4:
@@ -111,11 +127,9 @@ public class Main {
         System.out.println("   1. Ludogoretz\n   2. Manchester United\n   3. Barcelona\n   4. Levski");
         int answer4 = sc.nextInt();
         while (answer4 < 1 || answer4 > 4) {
-            if (answer4 < 1 || answer4 > 4) {
-                System.out.println("Incorrect input!");
-                System.out.println("Try again: ");
-                answer4 = sc.nextInt();
-            }
+            System.out.println("Incorrect input!");
+            System.out.println("Try again: ");
+            answer4 = sc.nextInt();
         }
         switch (answer4) {
             case 2, 3, 4:
@@ -131,11 +145,9 @@ public class Main {
         System.out.println("   1. 4\n   2. 8\n   3. 7\n   4. 13");
         int answer5 = sc.nextInt();
         while (answer5 < 1 || answer5 > 4) {
-            if (answer5 < 1 || answer5 > 4) {
-                System.out.println("Incorrect input!");
-                System.out.println("Try again: ");
-                answer5 = sc.nextInt();
-            }
+            System.out.println("Incorrect input!");
+            System.out.println("Try again: ");
+            answer5 = sc.nextInt();
         }
 
         switch (answer5) {
@@ -158,11 +170,9 @@ public class Main {
         System.out.println("   1. 4\n   2. 8\n   3. 7\n   4. 13");
         int answer1 = sc.nextInt();
         while (answer1 < 1 || answer1 > 4) {
-            if (answer1 < 1 || answer1 > 4) {
-                System.out.println("Incorrect input!");
-                System.out.println("Try again: ");
-                answer1 = sc.nextInt();
-            }
+            System.out.println("Incorrect input!");
+            System.out.println("Try again: ");
+            answer1 = sc.nextInt();
         }
 
         switch (answer1) {

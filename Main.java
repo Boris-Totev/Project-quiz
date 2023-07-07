@@ -15,6 +15,13 @@ public class Main {
                 case 1:
                     firstTheme(points);
                 case 2:
+                    secondTheme(points);
+                case 3:
+                    thirdTheme(points);
+                case 4:
+                    fourthTheme(points);
+                case 5:
+                    fifthTheme(points);
             }
         } else {
             System.exit(0);
@@ -37,6 +44,12 @@ public class Main {
                     firstTheme(points);
                 case 2:
                     secondTheme(points);
+                case 3:
+                    thirdTheme(points);
+                case 4:
+                    fourthTheme(points);
+                case 5:
+                    fifthTheme(points);
             }
         } else {
             System.exit(0);
@@ -46,7 +59,97 @@ public class Main {
     public static void firstTheme(int points) {
         Scanner sc = new Scanner(System.in);
 
-        try (BufferedReader reader = new BufferedReader(new FileReader("Questions.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("firstThemeQuestions.csv"))) {
+
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                {
+                    if (parts.length == 7) {
+                        String questionNumber = parts[0];
+                        String question = parts[1];
+                        String answerA = parts[2];
+                        String answerB = parts[3];
+                        String answerC = parts[4];
+                        String answerD = parts[5];
+                        int correctAnswer = Integer.parseInt(parts[6]);
+                        System.out.println(questionNumber + "\n " + question + "\n   Answer 1: " + answerA + "\n   Answer 2: " + answerB + "\n   Answer 3: " + answerC + "\n   Answer 4: " + answerD);
+                        int answer = sc.nextInt();
+                        while (answer < 1 || answer > 4) {
+                            System.out.println("Incorrect input!");
+                            System.out.println("Try again: ");
+                            answer = sc.nextInt();
+                        }
+
+                        if (answer != correctAnswer) {
+                            System.out.println("Wrong answer!");
+                            System.out.println("The correct answer was number: " + correctAnswer);
+                            System.out.println("Your points are: " + points + "\n");
+                            gameOver(points);
+                        } else {
+                            System.out.println("Correct answer!");
+                            points++;
+                            System.out.println("Your points are: " + points + "\n");
+                        }
+                    }
+                }
+            }
+            answeredEverythingCorrectly(points);
+        } catch (IOException e) {
+            System.out.println("грешка при четене/писане на þайлове: " + e.getMessage());
+        }
+    }
+
+    public static void secondTheme(int points) {
+        Scanner sc = new Scanner(System.in);
+
+        try (BufferedReader reader = new BufferedReader(new FileReader("secondThemeQuestions.csv"))) {
+
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                {
+                    if (parts.length == 7) {
+                        String questionNumber = parts[0];
+                        String question = parts[1];
+                        String answerA = parts[2];
+                        String answerB = parts[3];
+                        String answerC = parts[4];
+                        String answerD = parts[5];
+                        int correctAnswer = Integer.parseInt(parts[6]);
+                        System.out.println(questionNumber + "\n " + question + "\n   Answer 1: " + answerA + "\n   Answer 2: " + answerB + "\n   Answer 3: " + answerC + "\n   Answer 4: " + answerD);
+                        int answer = sc.nextInt();
+                        while (answer < 1 || answer > 4) {
+                            System.out.println("Incorrect input!");
+                            System.out.println("Try again: ");
+                            answer = sc.nextInt();
+                        }
+
+                        if (answer != correctAnswer) {
+                            System.out.println("Wrong answer!");
+                            System.out.println("The correct answer was number: " + correctAnswer);
+                            System.out.println("Your points are: " + points + "\n");
+                            gameOver(points);
+                        } else {
+                            System.out.println("Correct answer!");
+                            points++;
+                            System.out.println("Your points are: " + points + "\n");
+                        }
+                    }
+                }
+            }
+            answeredEverythingCorrectly(points);
+        } catch (IOException e) {
+            System.out.println("грешка при четене/писане на þайлове: " + e.getMessage());
+        }
+    }
+
+    public static void thirdTheme(int points) {
+        Scanner sc = new Scanner(System.in);
+
+        try (BufferedReader reader = new BufferedReader(new FileReader("thirdThemeQuestions.csv"))) {
 
             String line;
 
@@ -54,155 +157,149 @@ public class Main {
                 String[] parts = line.split(",");
                 {
                     if (parts.length == 5) {
-                        String question = parts[0];
-                        String answerA = parts[1];
-                        String answerB = parts[2];
-                        String answerC = parts[3];
-                        String answerD = parts[4];
-                        System.out.println(question + "\n   " + answerA + "\n   " + answerB + "\n   " + answerC + "\n   " + answerD);
-                        int answer1 = sc.nextInt();
-                        while (answer1 < 1 || answer1 > 4) {
+                        String questionNumber = parts[0];
+                        String question = parts[1];
+                        String answerA = parts[2];
+                        String answerB = parts[3];
+                        int correctAnswer = Integer.parseInt(parts[4]);
+                        System.out.println(questionNumber + "\n " + question + "\n   Answer 1: " + answerA + "\n   Answer 2: " + answerB);
+                        int answer = sc.nextInt();
+                        while (answer < 1 || answer > 2) {
                             System.out.println("Incorrect input!");
                             System.out.println("Try again: ");
-                            answer1 = sc.nextInt();
+                            answer = sc.nextInt();
                         }
 
-                        switch (answer1) {
-                            case 1, 2, 4:
-                                System.out.println("Wrong answer!");
-                                System.out.println("Your points are: " + points);
-                                gameOver(points);
-                            case 3:
-                                System.out.println("Correct answer!");
-                                points++;
-                                System.out.println("Your points are: " + points);
+                        if (answer != correctAnswer) {
+                            System.out.println("Wrong answer!");
+                            System.out.println("The correct answer was: " + correctAnswer);
+                            System.out.println("Your points are: " + points + "\n");
+                            gameOver(points);
+                        } else {
+                            System.out.println("Correct answer!");
+                            points++;
+                            System.out.println("Your points are: " + points + "\n");
                         }
                     }
                 }
             }
+            answeredEverythingCorrectly(points);
         } catch (IOException e) {
             System.out.println("грешка при четене/писане на þайлове: " + e.getMessage());
         }
-
-        System.out.println("Question 2: \n How many people are there in a football team?");
-        System.out.println("   1. 5\n   2. 6\n   3. 21\n   4. 11");
-        int answer2 = sc.nextInt();
-
-        while (answer2 < 1 || answer2 > 4) {
-            System.out.println("Incorrect input!");
-            System.out.println("Try again: ");
-            answer2 = sc.nextInt();
-        }
-        switch (answer2) {
-            case 1, 2, 3:
-                System.out.println("Wrong answer!");
-                System.out.println("Your points are: " + points);
-                gameOver(points);
-            case 4:
-                System.out.println("Correct answer!");
-                points++;
-                System.out.println("Your points are: " + points);
-        }
-
-        System.out.println("Question 3: \n Which football team is based in the Bulgarian city Razgrad?");
-        System.out.println("   1. Ludogoretz\n   2. Manchester United\n   3. Barcelona\n   4. Levski");
-        int answer3 = sc.nextInt();
-        while (answer3 < 1 || answer3 > 4) {
-            System.out.println("Incorrect input!");
-            System.out.println("Try again: ");
-            answer3 = sc.nextInt();
-        }
-        switch (answer3) {
-            case 2, 3, 4:
-                System.out.println("Wrong answer!");
-                System.out.println("Your points are: " + points);
-                gameOver(points);
-            case 1:
-                System.out.println("Correct answer!");
-                points++;
-                System.out.println("Your points are: " + points);
-
-        }
-        System.out.println("Question 4: \n Which football team is based in the Bulgarian city Razgrad?");
-        System.out.println("   1. Ludogoretz\n   2. Manchester United\n   3. Barcelona\n   4. Levski");
-        int answer4 = sc.nextInt();
-        while (answer4 < 1 || answer4 > 4) {
-            System.out.println("Incorrect input!");
-            System.out.println("Try again: ");
-            answer4 = sc.nextInt();
-        }
-        switch (answer4) {
-            case 2, 3, 4:
-                System.out.println("Wrong answer!");
-                System.out.println("Your points are: " + points);
-                gameOver(points);
-            case 1:
-                System.out.println("Correct answer!");
-                points++;
-                System.out.println("Your points are: " + points);
-        }
-        System.out.println("Question 5: \n What is Ronaldo's number?");
-        System.out.println("   1. 4\n   2. 8\n   3. 7\n   4. 13");
-        int answer5 = sc.nextInt();
-        while (answer5 < 1 || answer5 > 4) {
-            System.out.println("Incorrect input!");
-            System.out.println("Try again: ");
-            answer5 = sc.nextInt();
-        }
-
-        switch (answer5) {
-            case 1, 2, 4:
-                System.out.println("Wrong answer!");
-                System.out.println("Your points are: " + points);
-                gameOver(points);
-            case 3:
-                System.out.println("Correct answer!");
-                points++;
-                System.out.println("Your points are: " + points);
-        }
-        answeredEverythingCorrectly(points);
     }
 
-    public static void secondTheme(int points) {
+    public static void fourthTheme(int points) {
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Question 1: \n What is Ronaldo's number?");
-        System.out.println("   1. 4\n   2. 8\n   3. 7\n   4. 13");
-        int answer1 = sc.nextInt();
-        while (answer1 < 1 || answer1 > 4) {
-            System.out.println("Incorrect input!");
-            System.out.println("Try again: ");
-            answer1 = sc.nextInt();
-        }
+        try (BufferedReader reader = new BufferedReader(new FileReader("fourthThemeQuestions.csv"))) {
 
-        switch (answer1) {
-            case 1, 2, 4:
-                System.out.println("Wrong answer!");
-                System.out.println("Your points are: " + points);
-                gameOver(points);
-            case 3:
-                System.out.println("Correct answer!");
-                points++;
-                System.out.println("Your points are: " + points);
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                {
+                    if (parts.length == 7) {
+                        String questionNumber = parts[0];
+                        String question = parts[1];
+                        String answerA = parts[2];
+                        String answerB = parts[3];
+                        String answerC = parts[4];
+                        String answerD = parts[5];
+                        int correctAnswer = Integer.parseInt(parts[6]);
+                        System.out.println(questionNumber + "\n " + question + "\n   Answer 1: " + answerA + "\n   Answer 2: " + answerB + "\n   Answer 3: " + answerC + "\n   Answer 4: " + answerD);
+                        int answer = sc.nextInt();
+                        while (answer < 1 || answer > 4) {
+                            System.out.println("Incorrect input!");
+                            System.out.println("Try again: ");
+                            answer = sc.nextInt();
+                        }
+
+                        if (answer != correctAnswer) {
+                            System.out.println("Wrong answer!");
+                            System.out.println("The correct answer was number: " + correctAnswer);
+                            System.out.println("Your points are: " + points + "\n");
+                            gameOver(points);
+                        } else {
+                            System.out.println("Correct answer!");
+                            points++;
+                            System.out.println("Your points are: " + points + "\n");
+                        }
+                    }
+                }
+            }
+            answeredEverythingCorrectly(points);
+        } catch (IOException e) {
+            System.out.println("грешка при четене/писане на þайлове: " + e.getMessage());
         }
-        answeredEverythingCorrectly(points);
+    }
+
+    public static void fifthTheme(int points) {
+        Scanner sc = new Scanner(System.in);
+
+        try (BufferedReader reader = new BufferedReader(new FileReader("fifthThemeQuestions.csv"))) {
+
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                {
+                    if (parts.length == 7) {
+                        String questionNumber = parts[0];
+                        String question = parts[1];
+                        String answerA = parts[2];
+                        String answerB = parts[3];
+                        String answerC = parts[4];
+                        String answerD = parts[5];
+                        int correctAnswer = Integer.parseInt(parts[6]);
+                        System.out.println(questionNumber + "\n " + question + "\n   Answer 1: " + answerA + "\n   Answer 2: " + answerB + "\n   Answer 3: " + answerC + "\n   Answer 4: " + answerD);
+                        int answer = sc.nextInt();
+                        while (answer < 1 || answer > 4) {
+                            System.out.println("Incorrect input!");
+                            System.out.println("Try again: ");
+                            answer = sc.nextInt();
+                        }
+
+                        if (answer != correctAnswer) {
+                            System.out.println("Wrong answer!");
+                            System.out.println("The correct answer was number: " + correctAnswer);
+                            System.out.println("Your points are: " + points + "\n");
+                            gameOver(points);
+                        } else {
+                            System.out.println("Correct answer!");
+                            points++;
+                            System.out.println("Your points are: " + points + "\n");
+                        }
+                    }
+                }
+            }
+            answeredEverythingCorrectly(points);
+        } catch (IOException e) {
+            System.out.println("грешка при четене/писане на þайлове: " + e.getMessage());
+        }
     }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Welcome to my quiz. Here are the rules: \n   Rule 1: You get shown 5 themes, you can choose which one you want to try. \n   Rule 2: Every theme has 6 questions with 2 or 4 answers. The game lasts until you make a mistake.\n   Rule 3: If you want to you can choose another theme after completing the first one.");
+        System.out.println("Welcome to my quiz. Here are the rules: \n   Rule 1: You get shown 5 themes, you can choose which one you want to try. \n   Rule 2: Every theme has 5 questions with 2 or 4 answers. The game lasts until you make a mistake.\n   Rule 3: You have to answer with the number before the answer. \n   Rule 4: If you want to you can choose another theme after completing the first one.");
         System.out.println();
         System.out.println("Here are the themes: \n   1.Football \n   2.History\n   3.True or False\n   4.Games\n   5.Countries");
         System.out.println();
         System.out.print("Which theme would you choose? ");
         int points = 0;
         int decider = sc.nextInt();
+        System.out.println();
         switch (decider) {
             case 1:
-                System.out.println();
                 firstTheme(points);
             case 2:
                 secondTheme(points);
+            case 3:
+                thirdTheme(points);
+            case 4:
+                fourthTheme(points);
+            case 5:
+                fifthTheme(points);
         }
     }
 }

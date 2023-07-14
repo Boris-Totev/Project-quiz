@@ -111,6 +111,7 @@ public class Main {
         }
     }
 
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Welcome to my quiz. Here are the rules: \n   Rule 1: You get shown 5 themes, you can choose which one you want to try. \n   Rule 2: Every theme has 5 questions with 2 or 4 answers. The game lasts until you make a mistake.\n   Rule 3: You have to answer with the number before the answer. \n   Rule 4: If you want to you can choose another theme after completing the first one.");

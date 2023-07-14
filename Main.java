@@ -1,7 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void gameOver(int score) {
@@ -34,13 +34,28 @@ public class Main {
     }
 
     public static void processMultipleChoiceQuestion(String questionNumber, String question, String answerA, String answerB, String answerC, String answerD, int correctAnswer, int score) {
+        List<String> answers = new ArrayList<>(Arrays.asList(answerA, answerB, answerC, answerD));
+        Collections.shuffle(answers);
         Scanner sc = new Scanner(System.in);
-        System.out.println(questionNumber + "\n " + question + "\n   Answer 1: " + answerA + "\n   Answer 2: " + answerB + "\n   Answer 3: " + answerC + "\n   Answer 4: " + answerD);
+        System.out.println(questionNumber + "\n " + question);
+        for (int i = 0; i < answers.size(); i++) {
+            System.out.println("   Answer " + (i + 1) + ": " + answers.get(i));
+        }
         int answer = sc.nextInt();
         while (answer < 1 || answer > 4) {
             System.out.println("Incorrect input!");
             System.out.println("Try again: ");
             answer = sc.nextInt();
+        }
+
+        if (answers.get(answer - 1).equals(answerA)) {
+            answer = 1;
+        } else if (answers.get(answer - 1).equals(answerB)) {
+            answer = 2;
+        } else if (answers.get(answer - 1).equals(answerC)) {
+            answer = 3;
+        } else if (answers.get(answer - 1).equals(answerD)) {
+            answer = 4;
         }
 
         if (answer != correctAnswer) {
@@ -52,17 +67,29 @@ public class Main {
             System.out.println("Correct answer!");
             score++;
             System.out.println("Your score is: " + score + "\n");
+            playTheme(Integer.parseInt(questionNumber), score);
         }
     }
 
     public static void processTrueFalseQuestion(String questionNumber, String question, String answerA, String answerB, int correctAnswer, int score) {
+        List<String> answers = new ArrayList<>(Arrays.asList(answerA, answerB));
+        Collections.shuffle(answers);
         Scanner sc = new Scanner(System.in);
-        System.out.println(questionNumber + "\n " + question + "\n   Answer 1: " + answerA + "\n   Answer 2: " + answerB);
+        System.out.println(questionNumber + "\n " + question);
+        for (int i = 0; i < answers.size(); i++) {
+            System.out.println("   Answer " + (i + 1) + ": " + answers.get(i));
+        }
         int answer = sc.nextInt();
         while (answer < 1 || answer > 2) {
             System.out.println("Incorrect input!");
             System.out.println("Try again: ");
             answer = sc.nextInt();
+        }
+
+        if (answers.get(answer - 1).equals(answerA)) {
+            answer = 1;
+        } else if (answers.get(answer - 1).equals(answerB)) {
+            answer = 2;
         }
 
         if (answer != correctAnswer) {
@@ -74,34 +101,42 @@ public class Main {
             System.out.println("Correct answer!");
             score++;
             System.out.println("Your score is: " + score + "\n");
+            playTheme(Integer.parseInt(questionNumber), score);
         }
     }
 
     public static void playTheme(int themeNumber, int score) {
         Scanner sc = new Scanner(System.in);
         String fileName = themeNumber + "thThemeQuestions.csv";
+        List<String> questions = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
 
             while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(",");
+                questions.add(line);
+            }
+
+            Collections.shuffle(questions);
+
+            for (String question : questions) {
+                String[] parts = question.split(",");
                 if (parts.length == 7) {
                     String questionNumber = parts[0];
-                    String question = parts[1];
+                    String questionText = parts[1];
                     String answerA = parts[2];
                     String answerB = parts[3];
                     String answerC = parts[4];
                     String answerD = parts[5];
                     int correctAnswer = Integer.parseInt(parts[6]);
-                    processMultipleChoiceQuestion(questionNumber, question, answerA, answerB, answerC, answerD, correctAnswer, score);
+                    processMultipleChoiceQuestion(questionNumber, questionText, answerA, answerB, answerC, answerD, correctAnswer, score);
                 } else if (parts.length == 5) {
                     String questionNumber = parts[0];
-                    String question = parts[1];
+                    String questionText = parts[1];
                     String answerA = parts[2];
                     String answerB = parts[3];
                     int correctAnswer = Integer.parseInt(parts[4]);
-                    processTrueFalseQuestion(questionNumber, question, answerA, answerB, correctAnswer, score);
+                    processTrueFalseQuestion(questionNumber, questionText, answerA, answerB, correctAnswer, score);
                 }
             }
 
@@ -110,7 +145,6 @@ public class Main {
             System.out.println("Error while reading/writing files: " + e.getMessage());
         }
     }
-
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
